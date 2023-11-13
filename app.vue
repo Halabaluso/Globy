@@ -18,6 +18,8 @@
 import HeaderComponent from "./components/Header&Menu/HeaderComponent.vue"
 import MenuComponent from "./components/Header&Menu/MenuComponent.vue"
 import 'vue-loading-overlay/dist/css/index.css';
+let colorMode = useColorMode();
+colorMode.preference = "bumblebee"
 </script>
 
 <style></style>

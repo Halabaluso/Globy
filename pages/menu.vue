@@ -3,15 +3,15 @@
         <div class="text-sm breadcrumbs">
             <ul>
                 <li><a>Home</a></li>
-                <li><a>Restaurants</a></li>
+                <li><a>Menu</a></li>
             </ul>
         </div>
-        <RestaurantList/>
+        <MenuList/>
     </div>
 </template>
 
 <script setup>
-import RestaurantList from "../components/Lists/RestaurantsComponent.vue"
+import MenuList from "../components/Lists/MenuComponent.vue"
 </script>
 
 <style></style>
