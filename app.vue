@@ -17,6 +17,7 @@
 <script setup>
 import HeaderComponent from "./components/Header&Menu/HeaderComponent.vue"
 import MenuComponent from "./components/Header&Menu/MenuComponent.vue"
+import 'vue-loading-overlay/dist/css/index.css';
 </script>
 
 <style></style>

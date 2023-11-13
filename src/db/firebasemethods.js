@@ -5,13 +5,12 @@ async function loadData(querystring){
     const dbRef = ref(getDatabase());
     await get(child(dbRef, querystring)).then((snapshot) => {
       if (snapshot.exists()) {
-        console.log("Pasa :D")
         data = snapshot.val();
       } else {
-        data = null
+        data = false
       }
     }).catch((error) => {
-      data = null
+      data = false
     });
 
     return data
@@ -28,6 +27,7 @@ async function writeData(querystring, object){
         boolean = true
     })
     .catch(() => {
+      console.log("Pasa :D")
         boolean = false
     })
     return boolean

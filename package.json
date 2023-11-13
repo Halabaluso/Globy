@@ -21,6 +21,8 @@
     "@pinia/nuxt": "^0.5.1",
     "daisyui": "^3.9.4",
     "firebase": "^10.6.0",
-    "pinia": "^2.1.7"
+    "moment": "^2.29.4",
+    "pinia": "^2.1.7",
+    "vue-loading-overlay": "^6.0.3"
   }
 }

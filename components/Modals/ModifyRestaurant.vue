@@ -1,53 +1,53 @@
 <template>
-    <dialog id="modal_restaurant" class="modal">
+    <dialog id="modal_restaurant_modify" class="modal">
         <div class="modal-box">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             </form>
             <form @submit="createRestaurant($event)" method="dialog">
                 <h3 class="font-bold text-lg">
-                    <Icon name="ph:plus-circle-bold"></Icon> New restaurant
+                    <Icon name="ph:plus-circle-bold"></Icon> Modify restaurant
                 </h3>
                 <div class="form-control w-full my-2">
                     <label class="label">
                         <span class="label-text">Restaurant Name</span>
                     </label>
-                    <input v-model="data.name" type="text" placeholder="Type here" class="input input-bordered w-full" />
+                    <input v-model="restaurant.restaurant.name" type="text" placeholder="Type here" class="input input-bordered w-full" />
                 </div>
                 <div class="form-control w-full my-2">
                     <label class="label">
                         <span class="label-text">Restaurant Subname</span>
                     </label>
-                    <input v-model="data.subname" type="text" placeholder="Type here" class="input input-bordered w-full" />
+                    <input v-model="restaurant.restaurant.subname" type="text" placeholder="Type here" class="input input-bordered w-full" />
                 </div>
                 <div class="form-control w-full my-2">
                     <label class="label">
                         <span class="label-text">Type of food</span>
                     </label>
-                    <input v-model="data.food" type="text" placeholder="Type here" class="input input-bordered w-full" />
+                    <input v-model="restaurant.restaurant.food" type="text" placeholder="Type here" class="input input-bordered w-full" />
                 </div>
                 <div class="form-control w-full my-2">
                     <label class="label">
                         <span class="label-text">Restaurant address</span>
                     </label>
-                    <input v-model="data.address" type="text" placeholder="Type here" class="input input-bordered w-full" />
+                    <input v-model="restaurant.restaurant.address" type="text" placeholder="Type here" class="input input-bordered w-full" />
                 </div>
                 <div class="form-control w-full my-2">
                     <label class="label">
                         <span class="label-text">Resutaurant open</span>
                     </label>
-                    <input v-model="data.openclock" type="text" placeholder="Type here"
+                    <input v-model="restaurant.restaurant.openclock" type="text" placeholder="Type here"
                         class="input input-bordered w-full" />
                 </div>
                 <div class="form-control w-full my-2">
                     <label class="label">
                         <span class="label-text">Restaurant close</span>
                     </label>
-                    <input v-model="data.closeclock" type="text" placeholder="Type here"
+                    <input v-model="restaurant.restaurant.closeclock" type="text" placeholder="Type here"
                         class="input input-bordered w-full" />
                 </div>
                 <button type="submit" class="btn btn-primary mt-5">
-                    <Icon name="ph:plus-circle-bold"></Icon> Create restaurant
+                    <Icon name="ph:plus-circle-bold"></Icon> Modify restaurant
                 </button>
             </form>
         </div>
@@ -79,14 +79,7 @@ const restaurant = restaurantStore()
 const data = reactive({
     errormsg: false,
     truemsg: false,
-    name: "McDonald",
-    subname: "Franquicia hamburguesería",
-    food: "Comida rápida",
-    address: "Toda España",
-    openclock: moment("12:00", "HH:mm").format("HH:mm:ss"),
-    closeclock: moment("23:00", "HH:mm").format("HH:mm:ss")
 })
-
 
 const createRestaurant = async (e) => {
     const validate = validateForm()
@@ -97,31 +90,20 @@ const createRestaurant = async (e) => {
 }
 
 const reloadRestaurants = async () => {
-    const data = await restaurant.getAllRestaurants("globy/restaurants")
-    if(data !== false){
-        restaurant.takeObjectLen(data)
-    }
-    
+    await restaurant.getAllRestaurants("globy/restaurants")
 }
 
 const pushRestaurant = async () => {
-    const string = "globy/restaurants"
-    const object = {
-        name: data.name,
-        subname: data.subname,
-        food: data.food,
-        address: data.address,
-        openclock: data.openclock,
-        closeclock: data.closeclock
-    }
-    await restaurant.pushRestaurant(string, object)
+    const string = "globy/restaurants/" + restaurant.restaurantid 
+    const object = restaurant.restaurant
+    await restaurant.modifyRestaurant(string, object)
 }
 
 const validateForm = () => {
     let booleanvalidation = true
-    if (data.name.length < 2 || data.subname.length < 2 ||
-        data.subname.length < 2 || data.food.length < 2 ||
-        data.openclock.length < 2 || data.closeclock.length < 2) {
+    if (restaurant.restaurant.name.length < 2 || restaurant.restaurant.subname.length < 2 ||
+        restaurant.restaurant.address.length < 2 || restaurant.restaurant.food.length < 2 ||
+        restaurant.restaurant.openclock.length < 2 || restaurant.restaurant.closeclock.length < 2) {
         data.errormsg = true
         booleanvalidation = false
         setTimeout(() => {
