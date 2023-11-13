@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-primary w-max my-5" onclick="modal_Menu.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Menu</button>
+    <button class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Menu.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Menu</button>
     <div v-if="Menu.lenMenu > 0 || restaurant.lenrestaurant > 0" class="flex flex-col">
         <div class="overflow-x-auto">
             <table class="table">
@@ -44,8 +44,8 @@
                             <span class="badge badge-ghost badge-sm">{{ Menu.Restaurant }}</span>
                         </td>
                         <td class="flex flex-row">
-                            <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_delete.showModal()" class="btn btn-error m-1">Delete</button>
-                            <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_modify.showModal()" class="btn btn-primary m-1">Modify</button>
+                            <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_delete.showModal()" class="btn btn-error m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Delete</button>
+                            <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_modify.showModal()" class="btn btn-primary m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Modify</button>
                         </td>
                     </tr>
                 </tbody>
