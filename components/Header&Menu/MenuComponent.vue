@@ -11,6 +11,7 @@
         <li class="hover:bg-gray-200 duration-300 hover:-translate-y-2 font-bold"><router-link to = "/menu"><Icon name = "ph:fork-knife-bold" size = "1.8em" class="text-secondary"></Icon> Menus</router-link></li>
         <li class="hover:bg-gray-200 duration-300 hover:-translate-y-2 font-bold"><router-link to = "/dishes"><Icon name = "ph:egg-bold" size = "1.8em" class="text-secondary"></Icon> Dishes</router-link></li>
         <li class="hover:bg-gray-200 duration-300 hover:-translate-y-2 font-bold"><a><Icon name = "ph:bowl-food-bold" size = "1.8em" class="text-secondary"></Icon> Promotions</a></li>
+        <li class="hover:bg-gray-200 duration-300 hover:-translate-y-2 font-bold"><a><Icon name = "ph:bowl-food-bold" size = "1.8em" class="text-secondary"></Icon> Orders</a></li>
       </ul>
 </template>
 
