@@ -74,9 +74,9 @@
 </template>
 
 <script setup>
-import ModalRestaurant from "../Modals/NewRestaurant.vue"
-import ModalRestaurantModify from "../Modals/ModifyRestaurant.vue"
-import ModalRestaurantDelete from "../Modals/DeleteRestaurantModal.vue"
+import ModalRestaurant from "../Modals/RestaurantModal/NewRestaurant.vue"
+import ModalRestaurantModify from "../Modals/RestaurantModal/ModifyRestaurant.vue"
+import ModalRestaurantDelete from "../Modals/RestaurantModal/DeleteRestaurantModal.vue"
 import { restaurantStore } from "../../src/store/RestaurantStore"
 const restaurant = restaurantStore()
 const data = reactive({

@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { restaurantStore } from "../../src/store/RestaurantStore"
+import { restaurantStore } from "../../../../src/store/RestaurantStore"
 const restaurant = restaurantStore()
 const data = reactive({
     booleanmsg: false
