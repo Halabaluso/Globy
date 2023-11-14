@@ -12,7 +12,7 @@
                             </label>
                         </th>
                         <th>Name & subname</th>
-                        <th>Menu & Dish</th>
+                        <th>Dish & Dish</th>
                         <th>Price</th>
                         <th>Actions
                         </th>
@@ -40,9 +40,9 @@
                             </div>
                         </td>
                         <td>
-                            {{ Dish.MenuName }}
+                            {{ Dish.DishName }}
                             <br />
-                            <span class="badge badge-ghost badge-sm">{{ Dish.MenuId }}</span>
+                            <span class="badge badge-ghost badge-sm">{{ Dish.DishId }}</span>
                         </td>
                         <td>
                             <p>{{ Dish.price }}€</p>
@@ -64,10 +64,10 @@
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <span>Any Menu was created.</span>
-            <button class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Menu.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Menu</button>
+            <button class="btn w-max my-5 hover:shadow hover:-translate-y-2 duration-300" onclick="modal_Menu.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Menu</button>
         </div>
     </div>
-    <div v-if="Dish.lenDish === 0">
+    <div v-if="Dish.lenDish === 0 && Menu.lenMenu > 0 ">
         <div class="alert alert-info my-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -79,10 +79,7 @@
     <ModalDish/>
     <ModalDishDelete/>
     <ModalDishModify/>
-    <!--
-    <ModalDishDelete/>
     <ModalMenu/>
-    -->
     
 </template>
 
@@ -90,7 +87,7 @@
 import ModalDish from "../Modals/DishModals/NewDish.vue"
 import ModalDishModify from "../Modals/DishModals/ModifyDish.vue"
 import ModalDishDelete from "../Modals/DishModals/DeleteDishModal.vue"
-//import ModalMenu from "../Modals/MenuModals/NewMenu.vue"
+import ModalMenu from "../Modals/MenuModals/NewMenu.vue"
 import { DishStore } from "../../src/store/DishStore"
 import { MenuStore } from "../../src/store/MenuStore"
 const Menu = MenuStore()
@@ -103,18 +100,37 @@ onMounted(async () => {
 })
 
 const takeAllInfo = async () => {
-    const data = await takeData()
+    console.log("Pasa :D")
+    const data = await takeDataDishs()
     if(data !== false){
-        takeLenData(data)
+        takeLenDataDish(data)
+    }
+
+    const data2 = await takeDataMenus()
+    if(data2 !== false){
+        takeLenDataMenu(data2)
     }
 }
-const takeData = async () => {
+const takeDataDishs = async () => {
     let data = await Dish.getAllDishs("globy/Dishs")
     return data
 }
-const takeLenData = (object) => {
+
+const takeDataMenus = async () => {
+    const Menulen = Menu.lenMenu
+    let data = false
+    if(Menulen === 0){
+        data = await Menu.getAllMenus("globy/Menus")
+    }
+    return data
+}
+const takeLenDataDish = (object) => {
     let len = Dish.takeObjectLen(object)
     return len
+}
+const takeLenDataMenu = (object) => {
+    let len = Menu.takeObjectLen(object)
+    return len 
 }
 const takeDishData = (id, object) => {
     Dish.setDish(id, object)

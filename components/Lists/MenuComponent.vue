@@ -29,7 +29,7 @@
                             <div class="flex items-center space-x-3">
                                 <div class="avatar">
                                     <div class="mask mask-squircle">
-                                        <Icon name="ph:fork-knife-bold" size="3em" />
+                                        <Icon name="ph:fork-knife-bold" size="3em" class="text-primary"/>
                                     </div>
                                 </div>
                                 <div>
@@ -60,10 +60,10 @@
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <span>Any restaurant was created.</span>
-            <button class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_restaurant.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New restaurant</button>
+            <button class="btn w-max my-5 hover:-translate-y-2 hover:shadow duration-300" onclick="modal_restaurant.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New restaurant</button>
         </div>
     </div>
-    <div v-if="Menu.lenMenu === 0">
+    <div v-if="Menu.lenMenu === 0 && restaurant.lenrestaurant > 0">
         <div class="alert alert-info my-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
