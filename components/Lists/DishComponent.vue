@@ -1,6 +1,6 @@
 <template>
-    <button v-if="restaurant.lenrestaurant > 0" class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Menu.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Menu</button>
-    <div v-if="Menu.lenMenu > 0 && restaurant.lenrestaurant > 0" class="flex flex-col">
+    <button v-if="restaurant.lenrestaurant > 0" class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Dish.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Dish</button>
+    <div v-if="Dish.lenDish > 0 && restaurant.lenrestaurant > 0" class="flex flex-col">
         <div class="overflow-x-auto">
             <table class="table">
                 <!-- head -->
@@ -12,14 +12,15 @@
                             </label>
                         </th>
                         <th>Name & subname</th>
-                        <th>Restaurant</th>
+                        <th>Restaurant & Dish</th>
+                        <th>Price</th>
                         <th>Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- row 1 -->
-                    <tr v-for="Menu,i in Menu.allMenus" :key="Menu">
+                    <tr v-for="Dish,i in Dish.allDishs" :key="Dish">
                         <th>
                             <label>
                                 <input type="checkbox" class="checkbox" />
@@ -33,19 +34,19 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="font-bold">{{ Menu.name }}</div>
-                                    <div class="text-sm opacity-50">{{ Menu.subname }}</div>
+                                    <div class="font-bold">{{ Dish.name }}</div>
+                                    <div class="text-sm opacity-50">{{ Dish.subname }}</div>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            {{ Menu.RestaurantID }}
+                            {{ Dish.RestaurantID }}
                             <br />
-                            <span class="badge badge-ghost badge-sm">{{ Menu.Restaurant }}</span>
+                            <span class="badge badge-ghost badge-sm">{{ Dish.Restaurant }}</span>
                         </td>
                         <td class="flex flex-row">
-                            <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_delete.showModal()" class="btn btn-error m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Delete</button>
-                            <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_modify.showModal()" class="btn btn-primary m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Modify</button>
+                            <button @click="takeDishData(i,Dish)" onclick="modal_Dish_delete.showModal()" class="btn btn-error m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Delete</button>
+                            <button @click="takeDishData(i,Dish)" onclick="modal_Dish_modify.showModal()" class="btn btn-primary m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Modify</button>
                         </td>
                     </tr>
                 </tbody>
@@ -63,30 +64,32 @@
             <button class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_restaurant.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New restaurant</button>
         </div>
     </div>
-    <div v-if="Menu.lenMenu === 0">
+    <div v-if="Dish.lenDish === 0">
         <div class="alert alert-info my-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span>Any menu was created.</span>
+            <span>Any Dish was created.</span>
         </div>
     </div>
-    <ModalMenu/>
-    <ModalMenuModify/>
-    <ModalMenuDelete/>
+    <ModalDish/>
+    <!--
+    <ModalDishModify/>
+    <ModalDishDelete/>
     <ModalRestaurant/>
+    -->
 </template>
 
 <script setup>
-import ModalMenu from "../Modals/MenuModals/NewMenu.vue"
-import ModalMenuModify from "../Modals/MenuModals/ModifyMenu.vue"
-import ModalMenuDelete from "../Modals/MenuModals/DeleteMenuModal.vue"
-import ModalRestaurant from "../Modals/RestaurantModals/NewRestaurant.vue"
-import { MenuStore } from "../../src/store/MenuStore"
+import ModalDish from "../Modals/DishModals/NewDish.vue"
+//import ModalDishModify from "../Modals/DishModals/ModifyDish.vue"
+//import ModalDishDelete from "../Modals/DishModals/DeleteDishModal.vue"
+//import ModalRestaurant from "../Modals/RestaurantModals/NewRestaurant.vue"
+import { DishStore } from "../../src/store/DishStore"
 import { restaurantStore } from "../../src/store/RestaurantStore"
 const restaurant = restaurantStore()
-const Menu = MenuStore()
+const Dish = DishStore()
 const data = reactive({
     loading: true
 })
@@ -95,40 +98,21 @@ onMounted(async () => {
 })
 
 const takeAllInfo = async () => {
-    const data = await takeDataMenus()
+    const data = await takeData()
     if(data !== false){
-        takeLenDataMenu(data)
-    }
-
-    const data2 = await takeDataRestaurants()
-    console.log(data2)
-    if(data2 !== false){
-        takeLenDataRestaurant(data2)
+        takeLenData(data)
     }
 }
-const takeDataMenus = async () => {
-    let data = await Menu.getAllMenus("globy/Menus")
+const takeData = async () => {
+    let data = await Dish.getAllDishs("globy/Dishs")
     return data
 }
-
-const takeDataRestaurants = async () => {
-    const restaurantlen = restaurant.lenrestaurant
-    let data = false
-    if(restaurantlen === 0){
-        data = await restaurant.getAllRestaurants("globy/restaurants")
-    }
-    return data
-}
-const takeLenDataMenu = (object) => {
-    let len = Menu.takeObjectLen(object)
+const takeLenData = (object) => {
+    let len = Dish.takeObjectLen(object)
     return len
 }
-const takeLenDataRestaurant = (object) => {
-    let len = restaurant.takeObjectLen(object)
-    return len 
-}
-const takeMenuData = (id, object) => {
-    Menu.setMenu(id, object)
+const takeDishData = (id, object) => {
+    Dish.setDish(id, object)
 }
 
 </script>
