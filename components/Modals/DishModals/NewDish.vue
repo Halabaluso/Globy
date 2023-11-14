@@ -22,6 +22,12 @@
                 </div>
                 <div class="form-control w-full my-2">
                     <label class="label">
+                        <span class="label-text">Dish price</span>
+                    </label>
+                    <input v-model="data.price" type="number" placeholder="Type here" class="input input-bordered w-full" />
+                </div>
+                <div class="form-control w-full my-2">
+                    <label class="label">
                         <span class="label-text">Menu from</span>
                     </label>
                     <select @change="takeMenuValues($event)" class="select select-bordered w-full">
@@ -66,6 +72,7 @@ const data = reactive({
     truemsg: false,
     name: "Hamburguesa de atún",
     subname: "Sabrosa hamburguesa de lubina",
+    price: 0,
     MenuId: "",
     MenuName: ""
 })
@@ -93,7 +100,8 @@ const pushDish = async () => {
         name: data.name,
         subname: data.subname,
         MenuId: data.MenuId,
-        MenuName: data.MenuName
+        MenuName: data.MenuName,
+        price: data.price
     }
     await Dish.pushDish(string, object)
 }
@@ -101,14 +109,14 @@ const pushDish = async () => {
 const validateForm = () => {
     let booleanvalidation = true
     if (data.name.length < 2 || data.subname.length < 2 ||
-        data.MenuId.length < 2  || data.MenuName.length < 2) {
+        data.MenuId.length < 2  || data.MenuName.length < 2 || data.price < 0 || data.price === null) {
         data.errormsg = true
         booleanvalidation = false
         setTimeout(() => {
             data.errormsg = false
         }, 2500)
     } else {
-        data.truemsgmsg = true
+        data.truemsg = true
         booleanvalidation = true
         setTimeout(() => {
             data.truemsg = false

@@ -1,6 +1,6 @@
 <template>
-    <button v-if="restaurant.lenrestaurant > 0" class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Dish.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Dish</button>
-    <div v-if="Dish.lenDish > 0 && restaurant.lenrestaurant > 0" class="flex flex-col">
+    <button v-if="Menu.lenMenu > 0" class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Dish.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Dish</button>
+    <div v-if="Dish.lenDish > 0 && Menu.lenMenu > 0" class="flex flex-col">
         <div class="overflow-x-auto">
             <table class="table">
                 <!-- head -->
@@ -12,7 +12,7 @@
                             </label>
                         </th>
                         <th>Name & subname</th>
-                        <th>Restaurant & Dish</th>
+                        <th>Menu & Dish</th>
                         <th>Price</th>
                         <th>Actions
                         </th>
@@ -40,9 +40,12 @@
                             </div>
                         </td>
                         <td>
-                            {{ Dish.RestaurantID }}
+                            {{ Dish.MenuName }}
                             <br />
-                            <span class="badge badge-ghost badge-sm">{{ Dish.Restaurant }}</span>
+                            <span class="badge badge-ghost badge-sm">{{ Dish.MenuId }}</span>
+                        </td>
+                        <td>
+                            <p>{{ Dish.price }}€</p>
                         </td>
                         <td class="flex flex-row">
                             <button @click="takeDishData(i,Dish)" onclick="modal_Dish_delete.showModal()" class="btn btn-error m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Delete</button>
@@ -54,14 +57,14 @@
             </table>
         </div>
     </div>
-    <div v-if="restaurant.lenrestaurant === 0">
+    <div v-if="Menu.lenMenu === 0">
         <div class="alert alert-info">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span>Any restaurant was created.</span>
-            <button class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_restaurant.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New restaurant</button>
+            <span>Any Menu was created.</span>
+            <button class="btn btn-primary w-max my-5 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300" onclick="modal_Menu.showModal()"><Icon name = "ph:plus-circle-bold"></Icon> New Menu</button>
         </div>
     </div>
     <div v-if="Dish.lenDish === 0">
@@ -74,21 +77,23 @@
         </div>
     </div>
     <ModalDish/>
-    <!--
-    <ModalDishModify/>
     <ModalDishDelete/>
-    <ModalRestaurant/>
+    <ModalDishModify/>
+    <!--
+    <ModalDishDelete/>
+    <ModalMenu/>
     -->
+    
 </template>
 
 <script setup>
 import ModalDish from "../Modals/DishModals/NewDish.vue"
-//import ModalDishModify from "../Modals/DishModals/ModifyDish.vue"
-//import ModalDishDelete from "../Modals/DishModals/DeleteDishModal.vue"
-//import ModalRestaurant from "../Modals/RestaurantModals/NewRestaurant.vue"
+import ModalDishModify from "../Modals/DishModals/ModifyDish.vue"
+import ModalDishDelete from "../Modals/DishModals/DeleteDishModal.vue"
+//import ModalMenu from "../Modals/MenuModals/NewMenu.vue"
 import { DishStore } from "../../src/store/DishStore"
-import { restaurantStore } from "../../src/store/RestaurantStore"
-const restaurant = restaurantStore()
+import { MenuStore } from "../../src/store/MenuStore"
+const Menu = MenuStore()
 const Dish = DishStore()
 const data = reactive({
     loading: true

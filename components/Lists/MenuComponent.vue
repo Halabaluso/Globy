@@ -39,9 +39,9 @@
                             </div>
                         </td>
                         <td>
-                            {{ Menu.RestaurantID }}
+                            {{ Menu.restaurantName }}
                             <br />
-                            <span class="badge badge-ghost badge-sm">{{ Menu.Restaurant }}</span>
+                            <span class="badge badge-ghost badge-sm">ID: {{ Menu.restaurantId }}</span>
                         </td>
                         <td class="flex flex-row">
                             <button @click="takeMenuData(i,Menu)" onclick="modal_Menu_delete.showModal()" class="btn btn-error m-1 hover:btn-secondary hover:text-white hover:-translate-y-2 duration-300">Delete</button>
