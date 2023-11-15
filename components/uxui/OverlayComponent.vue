@@ -1,5 +1,5 @@
 <template>
-   <div v-if="!loading.loading" class="bg-white/80 h-screen w-screen fixed z-50">
+   <div v-if="loading.loading" class="bg-white/80 h-screen w-screen fixed z-50">
     <div class="opacity-100 flex flex-col justify-center items-center h-screen">
       <client-only>
         <Vue3Lottie :animationData="json" :height="200" :noMargin="true" :width="200" />

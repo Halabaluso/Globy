@@ -98,9 +98,11 @@ const data = reactive({
     loading: true
 })
 onMounted(async () => {
-    loading.changeLoading()
+    loading.loading = true
     await takeAllInfo()
-    loading.changeLoading()
+    setTimeout(() => {
+        loading.loading = false
+    }, 2000)
 })
 
 const takeAllInfo = async () => {

@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
-import { firebaseConfig }  from "../src/ignore/dbkeys"
-export default defineNuxtPlugin(nuxtApp => {
-    initializeApp(firebaseConfig)
+export default defineNuxtPlugin(async nuxtApp => {
+    const config = useRuntimeConfig()
+    console.log(config.public.firebaseConfig)
+    initializeApp(config.public.firebaseConfig)
 })

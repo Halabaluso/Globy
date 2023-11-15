@@ -24,10 +24,6 @@ import HeaderWelcome from "./components/Header&Menu/WelcomeHead.vue"
 import Loading from "./components/uxui/OverlayComponent.vue"
 import { LoadingStore } from "./src/store/LoadingStore"
 const loading = LoadingStore()
-loading.changeLoading()
-setTimeout(() => {
-  loading.changeLoading()
-}, 3500)
 let colorMode = useColorMode();
 colorMode.preference = "bumblebee"
 </script>
