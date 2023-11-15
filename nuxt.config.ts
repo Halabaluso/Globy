@@ -8,5 +8,6 @@ export default defineNuxtConfig({
     preference: 'bumblebee', // default theme
     dataValue: 'theme', // activate data-theme in <html> tag
   },
+  components: true
 
 });

@@ -90,17 +90,21 @@ import ModalDishDelete from "../Modals/DishModals/DeleteDishModal.vue"
 import ModalMenu from "../Modals/MenuModals/NewMenu.vue"
 import { DishStore } from "../../src/store/DishStore"
 import { MenuStore } from "../../src/store/MenuStore"
+import { LoadingStore } from "../../src/store/LoadingStore"
+const loading = LoadingStore()
 const Menu = MenuStore()
 const Dish = DishStore()
 const data = reactive({
     loading: true
 })
 onMounted(async () => {
+    loading.changeLoading()
     await takeAllInfo()
+    loading.changeLoading()
 })
 
 const takeAllInfo = async () => {
-    console.log("Pasa :D")
+    
     const data = await takeDataDishs()
     if(data !== false){
         takeLenDataDish(data)

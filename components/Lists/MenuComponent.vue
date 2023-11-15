@@ -85,13 +85,17 @@ import ModalMenuDelete from "../Modals/MenuModals/DeleteMenuModal.vue"
 import ModalRestaurant from "../Modals/RestaurantModals/NewRestaurant.vue"
 import { MenuStore } from "../../src/store/MenuStore"
 import { restaurantStore } from "../../src/store/RestaurantStore"
+import { LoadingStore } from "../../src/store/LoadingStore"
+const loading = LoadingStore()
 const restaurant = restaurantStore()
 const Menu = MenuStore()
 const data = reactive({
     loading: true
 })
 onMounted(async () => {
+    loading.changeLoading()
     await takeAllInfo()
+    loading.changeLoading()
 })
 
 const takeAllInfo = async () => {

@@ -21,9 +21,10 @@ async function writeData(querystring, object){
     let boolean = false
     const db = getDatabase();
     const postListRef = ref(db, querystring);
-    const newPostRef = push(postListRef);
+    const newPostRef = push(postListRef)
+    console.log(newPostRef.key)
     await set(newPostRef, object)
-    .then(() => {
+    .then((data) => {
         boolean = true
     })
     .catch(() => {
@@ -31,6 +32,23 @@ async function writeData(querystring, object){
         boolean = false
     })
     return boolean
+}
+
+async function writeDataWithID(querystring, object){
+  // Send data to the server
+  let boolean = false
+  const db = getDatabase();
+  const postListRef = ref(db, querystring);
+  const newPostRef = push(postListRef)
+  await set(newPostRef, object)
+  .then(() => {
+      boolean = newPostRef.key
+  })
+  .catch(() => {
+    console.log("Pasa :D")
+      boolean = false
+  })
+  return boolean
 }
 
 async function updateData(querystring, object){
@@ -73,5 +91,6 @@ export {
     filterData,
     loadData,
     removeData,
-    updateData
+    updateData,
+    writeDataWithID
 }

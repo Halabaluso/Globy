@@ -1,12 +1,16 @@
 import { defineStore } from "pinia"
-import { writeData, loadData, removeData, updateData } from "../db/firebasemethods"
+import { writeData, loadData, removeData, updateData, writeDataWithID } from "../db/firebasemethods"
 
 const MenuStore = defineStore("Menustore", {
     state: () => ({
         Menu : {},
         Menuid: "",
         allMenus: {},
-        lenMenu: 0
+        lenMenu: 0,
+
+        booleanquickcomplete: false,
+        arrayMenusQuickStart: [],
+
     }),
     actions:{
         getMenu(){
@@ -35,6 +39,11 @@ const MenuStore = defineStore("Menustore", {
             let boolean = true
             await writeData(querystring, object)
             return boolean
+            
+        },
+        async pushMenuId(querystring, object){
+            const id = await writeDataWithID(querystring, object)
+            return id
             
         },
         takeObjectLen(object){

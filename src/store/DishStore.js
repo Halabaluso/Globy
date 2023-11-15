@@ -6,7 +6,10 @@ const DishStore = defineStore("Dishstore", {
         Dish : {},
         Dishid: "",
         allDishs: {},
-        lenDish: 0
+        lenDish: 0,
+
+        booleanquickcomplete: false,
+        arrayDishsQuickStart: []
     }),
     actions:{
         getDish(){

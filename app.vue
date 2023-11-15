@@ -3,14 +3,16 @@
     <input id="my-drawer" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
       <!-- Page content here -->
-      <HeaderComponent/>
       <NuxtLayout>
-        <HeaderWelcome/>
-        <NuxtPage/>
+        <Loading/>
+        <HeaderComponent />
+        <HeaderWelcome />
+        <NuxtLoadingIndicator />
+        <NuxtPage />
       </NuxtLayout>
     </div>
     <div class="drawer-side">
-      <MenuComponent/>
+      <MenuComponent />
     </div>
   </div>
 </template>
@@ -19,7 +21,13 @@
 import HeaderComponent from "./components/Header&Menu/HeaderComponent.vue"
 import MenuComponent from "./components/Header&Menu/MenuComponent.vue"
 import HeaderWelcome from "./components/Header&Menu/WelcomeHead.vue"
-import 'vue-loading-overlay/dist/css/index.css';
+import Loading from "./components/uxui/OverlayComponent.vue"
+import { LoadingStore } from "./src/store/LoadingStore"
+const loading = LoadingStore()
+loading.changeLoading()
+setTimeout(() => {
+  loading.changeLoading()
+}, 3500)
 let colorMode = useColorMode();
 colorMode.preference = "bumblebee"
 </script>
@@ -29,6 +37,7 @@ colorMode.preference = "bumblebee"
 .page-leave-active {
   transition: all 0.4s;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;

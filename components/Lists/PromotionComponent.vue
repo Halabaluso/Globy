@@ -91,13 +91,17 @@ import ModalPromotionDelete from "../Modals/PromotionModals/DeletePromotionModal
 //import Modalrestaurant from "../Modals/restaurantModals/Newrestaurant.vue"
 import { PromotionStore } from "../../src/store/PromotionStore"
 import { restaurantStore } from "../../src/store/RestaurantStore"
+import { LoadingStore } from "../../src/store/LoadingStore"
+const loading = LoadingStore()
 const restaurant = restaurantStore()
 const Promotion = PromotionStore()
 const data = reactive({
     loading: true
 })
 onMounted(async () => {
+    loading.changeLoading()
     await takeAllInfo()
+    loading.changeLoading()
 })
 
 const takeAllInfo = async () => {
