@@ -12,7 +12,7 @@
                             </label>
                         </th>
                         <th>Name & subname</th>
-                        <th>Dish & Dish</th>
+                        <th>Menu</th>
                         <th>Price</th>
                         <th>Actions
                         </th>
@@ -40,9 +40,9 @@
                             </div>
                         </td>
                         <td>
-                            {{ Dish.DishName }}
+                            {{ Dish.MenuName }}
                             <br />
-                            <span class="badge badge-ghost badge-sm">{{ Dish.DishId }}</span>
+                            <span class="badge badge-ghost badge-sm">{{ Dish.MenuId }}</span>
                         </td>
                         <td>
                             <p>{{ Dish.price }}€</p>

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row items-center m-5 p-5 shadow border rounded-lg">
+    <div class="flex flex-row items-center m-5">
         <client-only>
             <Vue3Lottie :animationData="json" :height="120"
                 :noMargin = "true"
